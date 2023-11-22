@@ -13,7 +13,7 @@ resource "aws_security_group" "mysecgroup" {
 
   name   = "ec2-sec-ports"
   vpc_id = aws_vpc.grafanasql-vpc.id
-  
+
   ingress {
     from_port   = 80 # Porta padrão do HTTP
     to_port     = 80 # Porta padrão do HTTP
@@ -32,7 +32,7 @@ resource "aws_security_group" "mysecgroup" {
     from_port   = 3306 # Porta padrão do MySQL
     to_port     = 3306 # Porta padrão do MySQL
     protocol    = "tcp"
-    cidr_blocks = ["10.1.0.0/16"] # Exemplo de um intervalo de rede permitido
+    cidr_blocks = ["0.0.0.0/0"] # Exemplo de um intervalo de rede permitido
   }
 
   # Liberar a porta 80 para acesso livre via Internet
@@ -44,7 +44,7 @@ resource "aws_security_group" "mysecgroup" {
     ipv6_cidr_blocks = ["::/0"]
   }
 
-  #ssh ingress 
+  #ssh ingress
   ingress {
     from_port   = 22
     to_port     = 22
