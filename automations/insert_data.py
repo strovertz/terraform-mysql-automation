@@ -8,6 +8,15 @@ db_config = {
     'database': 'agencia_turismo'
 }
 
+def create_database():
+    conn = mysql.connector.connect(**db_config)
+    cursor = conn.cursor()
+
+    cursor.execute("CREATE DATABASE agencia_turismo")
+    conn.commit()
+
+    conn.close()
+
 def create_table(nome_tabela, cabecalho):
     conn = mysql.connector.connect(**db_config)
     cursor = conn.cursor()
@@ -36,6 +45,7 @@ def insert_data(nome_tabela, caminho_csv):
     conn.close()
 
 def main():
+    create_database()
     insert_data('clientes', '/tmp/clientes.csv')
     insert_data('fornecedores', '/tmp/fornecedores.csv')
     insert_data('servicos', '/tmp/servicos.csv')

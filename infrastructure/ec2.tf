@@ -32,19 +32,19 @@ resource "aws_instance" "grafana" {
   }
   provisioner "file" {
     source      = "../main-datasets/fornecedores.csv"
-    destination = "/tmp/credits.csv"
+    destination = "/tmp/fornecedores.csv"
   }
   provisioner "file" {
     source      = "../main-datasets/servicos.csv"
-    destination = "/tmp/titles.csv"
+    destination = "/tmp/servicos.csv"
   }
   provisioner "file" {
     source      = "../main-datasets/pedidos.csv"
-    destination = "/tmp/titles.csv"
+    destination = "/tmp/pedidos.csv"
   }
   provisioner "file" {
-    source      = "../main-datasets/itens_pedido.csv"
-    destination = "/tmp/titles.csv"
+    source      = "../main-datasets/itens_pedidos.csv"
+    destination = "/tmp/itens_pedidos.csv"
   }
   provisioner "file" {
     source      = "./internal-scripts/userdata.sh"
