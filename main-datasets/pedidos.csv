@@ -1,0 +1,11 @@
+id,cliente_id,data_pedido,total,modalidade_pagamento
+1,1,2023-01-01,500.00,Cartão
+2,2,2023-01-02,800.00,Transferência
+3,3,2023-01-03,300.00,Boleto
+4,4,2023-01-04,150.00,Boleto
+5,5,2023-01-05,1200.00,Cartão
+6,6,2023-01-06,1000.00,Transferência
+7,7,2023-01-07,700.00,Cartão
+8,8,2023-01-08,200.00,Boleto
+9,9,2023-01-09,400.00,Transferência
+10,10,2023-01-10,600.00,Cartão
