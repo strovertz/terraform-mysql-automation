@@ -45,32 +45,32 @@
           <div class="field">
             <label class="label">Valor do serviço</label>
             <div class="control">
-              <input class="input" type="text" placeholder="Text input">
+              <input class="input" v-model="price" type="text" placeholder="Text input">
             </div>
           </div>
 
           <div class="field">
             <label class="label">Endereço</label>
             <div class="control">
-              <input class="input" type="text" placeholder="Text input">
+              <input class="input" type="text" v-model="address" placeholder="Text input">
             </div>
           </div>
 
           <div class="field">
             <label class="label">Data</label>
             <div class="control">
-              <input class="input" type="text" placeholder="Text input">
+              <input class="input" type="text" v-model="data" placeholder="Text input">
             </div>
           </div>
 
           <div class="field">
             <label class="label">Descrição</label>
             <div class="control">
-              <textarea class="textarea" placeholder="Textarea"></textarea>
+              <textarea class="textarea" v-model="description" placeholder="Textarea"></textarea>
             </div>
           </div>
           <div class="control">
-            <button class="button is-link">Enviar</button>
+            <button class="button is-link" @click="formSend" >Enviar</button>
           </div>
         </form>
       </div>
@@ -80,5 +80,48 @@
 </template>
 
 <script>
+import axios from 'axios';
 
+import {instance} from '@/main';
+
+export default {
+  name: 'home',
+
+  data() {
+    return {
+      data: '',
+      price: '',
+      description: '',
+      address: '',
+    }
+  },
+  methods: {
+    formSend: function () {
+      instance.post('/form', {
+        'email': this.mail,
+        'phone': this.phone,
+        'msg': this.msg,
+        'name': this.name
+      })
+          .then((response) => {
+            if (response) {
+              this.name = '';
+              this.phone = '';
+              this.mail = '';
+              this.msg = '';
+              this.confirmation = true;
+              this.hidden = false;
+            }
+          })
+          .catch((error) => {
+            this.errorSend = true;
+            this.errorMsg = error;
+            setTimeout(() => {
+              this.errorSend = false;
+            }, 4000,)
+
+          });
+    },
+  }
+}
 </script>
