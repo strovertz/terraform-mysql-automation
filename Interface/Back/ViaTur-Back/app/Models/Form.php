@@ -9,7 +9,7 @@ class Form extends Model
 {
     use HasFactory;
 
-    public $table = 'form';
+    public $table = 'fornecedores';
     protected $primaryKey = 'id';
     protected $fillable = ['phone','email','msg','name'];
     public $guarded = ['update_at','created_at','id'];
