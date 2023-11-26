@@ -266,6 +266,7 @@ export default {
         'tipo_servico': this.selectedOption,
       })
           .then((response) => {
+            alert(response);
             if (response) {
               this.data = '';
               this.price = '';
@@ -273,14 +274,11 @@ export default {
               this.address = '';
               this.selectedOption = true;
 
+
             }
           })
           .catch((error) => {
             alert(error);
-            setTimeout(() => {
-
-            }, 4000,)
-
           });
     },
   }

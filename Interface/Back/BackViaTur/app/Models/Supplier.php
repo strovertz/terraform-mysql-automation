@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @property Carbon $deleted_at
  * @property Carbon $created_at
- * @property Carbon $updated_at
  * @property string $nome
  * @property float $valor
  * @property string $tipo_servico
@@ -42,12 +41,10 @@ class Supplier extends Model
     protected $hidden = [
         'created_at',
         'deleted_at',
-        'updated_at',
     ];
 
     public $casts = [
         'created_at' => 'datetime:d-m-Y',
         'deleted_at' => 'datetime:d-m-Y',
-        'updated_at' => 'datetime:d-m-Y',
     ];
 }

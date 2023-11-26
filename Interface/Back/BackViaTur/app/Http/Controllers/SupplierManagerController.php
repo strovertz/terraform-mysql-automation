@@ -15,16 +15,18 @@ class SupplierManagerController extends Controller
 
     public function store(Request $request): JsonResponse
     {
-        $sup = new Supplier();
+
+        $sup =  new Supplier();
         $sup -> nome = $request->input('nameSupplier');
         $sup -> tipo_servico =  $request->input('selectedOptionService');
         $sup -> valor =  $request->input('priceService');
         $sup -> descricao =  $request->input('descriptionService');
         $sup -> endereco =  $request->input('addressService');
         $sup -> data =  $request->input('dataService');
-        return $sup->save();
+        $sup->save();
 
-        return response()->json(['data' => $sup]);
+        dd($sup);
+        return response()->json($sup);
     }
 
     public function update(Request $request, int $id): JsonResponse

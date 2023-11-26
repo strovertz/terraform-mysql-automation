@@ -11,7 +11,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('supplier')->group(function (){
    Route::get('', [SupplierManagerController::class, 'index']);
-   Route::post('',[SupplierManagerController::class, 'store']);
+   Route::post('',function (){
+    dd(request());
+   });
    Route::get('/{id}', [SupplierManagerController::class, 'update']);
    Route::delete('/{id}',[SupplierManagerController::class, 'delete']);
 });
