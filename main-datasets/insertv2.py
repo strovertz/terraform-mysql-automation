@@ -74,7 +74,7 @@ def insert_data(nome_tabela, caminho_csv):
         # Adiciona 'created_act' ao cabeçalho
         cabecalho.append('created_act')
 
-        #create_table(nome_tabela, cabecalho)
+        create_table(nome_tabela, cabecalho)
 
         for linha in leitor_csv:
             # Preenche 'created_act' com o timestamp atual se necessário
@@ -84,9 +84,12 @@ def insert_data(nome_tabela, caminho_csv):
             # Garante que o número de valores na lista 'linha' corresponda ao número de colunas no cabeçalho
             linha = linha[:len(cabecalho)]
 
-            valores = ', '.join(['%s' for _ in linha])
-            query = f"INSERT INTO {nome_tabela} VALUES ({valores})"
-            cursor.execute(query, linha)
+            try:
+                valores = ', '.join(['%s' for _ in linha])
+                query = f"INSERT INTO {nome_tabela} VALUES ({valores})"
+                cursor.execute(query, linha)
+            except Exception as e:
+                print(f"Erro ao inserir linha {linha} na tabela {nome_tabela}: {e}")
 
     conn.commit()
     conn.close()
