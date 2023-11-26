@@ -1,5 +1,6 @@
 import csv
 import mysql.connector
+from datetime import datetime
 
 db_config = {
     'host': 'localhost',
@@ -31,7 +32,7 @@ def create_table_clientes():
             cpf VARCHAR(14) NOT NULL,
             endereco VARCHAR(255) NOT NULL,
             data_nasc DATE NOT NULL,
-            created_act TIMESTAMP NOT NULL,
+            created_act TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             updated_act TIMESTAMP,
             deleted_act TIMESTAMP
         )
@@ -53,7 +54,7 @@ def create_table_servicos():
             endereco VARCHAR(255),
             data DATE,
             descricao TEXT,
-            created_act TIMESTAMP NOT NULL,
+            created_act TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             updated_act TIMESTAMP,
             deleted_act TIMESTAMP
         )
@@ -72,6 +73,10 @@ def insert_data(nome_tabela, caminho_csv):
         create_table(nome_tabela, cabecalho)
 
         for linha in leitor_csv:
+            # Preenche 'created_act' com o timestamp atual se estiver vazio
+            if linha[cabecalho.index('created_act')] == '':
+                linha[cabecalho.index('created_act')] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
             valores = ', '.join(['%s' for _ in linha])
             query = f"INSERT INTO {nome_tabela} VALUES ({valores})"
             cursor.execute(query, linha)
