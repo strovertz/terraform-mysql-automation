@@ -79,8 +79,6 @@ def insert_data(nome_tabela, caminho_csv):
         for linha in leitor_csv:
             # Preenche 'created_act' com o timestamp atual se necessário
             if len(linha) < len(cabecalho):
-                linha.append(datetime.now().strftime('%Y-%))
-                linha.append(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
                 linha.append(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
 
             # Garante que o número de valores na lista 'linha' corresponda ao número de colunas no cabeçalho
