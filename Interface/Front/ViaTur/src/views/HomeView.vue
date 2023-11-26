@@ -3,7 +3,7 @@
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a class="navbar-item">
-          <h1 class="title"><strong>ViaTur</strong><br><p class="subtitle">Sua melhor escolha para turismo</p></h1>
+          <h1 class="title"><strong>ViaTur</strong><br>Sua melhor escolha para turismo</h1>
 
         </a>
       </div>
@@ -11,10 +11,70 @@
 
     <div class="box">
       <h2 class="title">Compre aqui um serviço</h2>
-      <div>
+      <div class="box">
+        <h3>Preencha seus dados para a compra</h3>
+        <form>
+          <div class="field">
+            <label class="label">Nome completo</label>
+            <div class="control">
+              <input class="input" type="text" v-model="name" placeholder="Diga o nome da sua empresa">
+            </div>
+          </div>
 
+          <div class="field">
+            <label class="label">Genero</label>
+            <div class="control">
+              <div class="select">
+                <select v-model="GenderSelectedOption">
+                  <option>Feminino</option>
+                  <option>Masculino</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">CPF</label>
+            <div class="control">
+              <input class="input" v-model="price" type="text" placeholder="Digite o valor">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Endereço</label>
+            <div class="control">
+              <input class="input" type="text" v-model="address" placeholder="Digite o endereço">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Data de Nascimento</label>
+            <div class="control">
+              <input class="input" type="date" v-model="data" placeholder="Digite a data">
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+      <div>
+        <section class="section" id="Services">
+          <p class="column has-text-centered title">Nossos serviços</p>
+          <div class=" has-text-centered ">
+            <div class=" columns is-multiline is-centered">
+              <span v-if="errorGetService" class="">{{ serviceErrorMsg }}</span>
+              <article class="column is-one-third box mosaicService" v-for="service in currentServices">
+                <i class=""></i>
+                <p class="title">{{ service.title }}</p>
+                <p class="subtitle">{{ service.content }}</p>
+              </article>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
+
+
     <div class="box">
       <h2 class="title">Anuncie aqui seu serviço</h2>
       <div>
@@ -22,7 +82,7 @@
           <div class="field">
             <label class="label">Fornecedor</label>
             <div class="control">
-              <input class="input" type="text" placeholder="Diga o nome da sua empresa">
+              <input class="input" type="text" v-model="name" placeholder="Diga o nome da sua empresa">
             </div>
           </div>
 
@@ -70,38 +130,130 @@
             </div>
           </div>
           <div class="control">
-            <button class="button is-link" @click="formSend" >Adicionar</button>
+            <button class="button is-link" @click="FormSend" >Adicionar</button>
           </div>
         </form>
       </div>
     </div>
-    <div class="box">
 
+
+    <div class="box">
+      <div class="box">
+        <h2 class="title">Edite seu serviço aqui</h2>
+        <div>
+          <form>
+            <div class="field">
+              <label class="label">Id Serviço</label>
+              <div class="control">
+                <input class="input" type="text" v-model="serviceId" placeholder="Coloque o numero">
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">Tipo de serviço</label>
+              <div class="control">
+                <div class="select">
+                  <select v-model="selectedOption">
+                    <option>Passagem Aerea</option>
+                    <option>Aluguel de carro</option>
+                    <option>Reserva de hotel</option>
+                    <option>Reserva de onibus</option>
+                    <option>Reserva de restaurante</option>
+                    <option>Agencia local</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">Valor do serviço</label>
+              <div class="control">
+                <input class="input" v-model="price" type="text" placeholder="Digite o valor">
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">Endereço</label>
+              <div class="control">
+                <input class="input" type="text" v-model="address" placeholder="Digite o endereço">
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">Data</label>
+              <div class="control">
+                <input class="input" type="date" v-model="data" placeholder="Digite a data">
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">Descrição</label>
+              <div class="control">
+                <textarea class="textarea" v-model="description" placeholder="Textarea"></textarea>
+              </div>
+            </div>
+            <div class="control">
+              <button class="button is-link" @click="FormUpdate" >Atualizar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="box">
+      <div class="box">
+        <h2 class="title">Exclua seu serviço aqui</h2>
+        <div>
+          <form>
+            <div class="field">
+              <label class="label">Id Serviço</label>
+              <div class="control">
+                <input class="input" type="text" v-model="serviceId" placeholder="Coloque o numero">
+              </div>
+            </div>
+            <div class="control">
+              <button class="button is-link" @click="FormDelete" >Excluir</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </main>
 </template>
 
 <script>
-import axios from 'axios';
-
 import {instance} from '@/main';
+import axios from 'axios';
 
 export default {
   name: 'home',
 
   data() {
     return {
+      name: '',
       data: '',
       price: '',
       description: '',
       address: '',
       selectedOption: '',
+      serviceId: ''
     }
   },
+  created() {
+    instance.get('/service')
+        .then((response) => {
+          this.currentServices = response.data.enabled;
+        })
+        .catch((error) => {
+          this.errorGetService = true;
+          this.serviceErrorMsg = error;
+        })
+  },
   methods: {
-    formSend: function () {
+    FormSend: function () {
       alert(this.selectedOption);
-      instance.post('/form', {
+      instance.post('supplier', {
         'data': this.data,
         'price': this.price,
         'description': this.description,
@@ -114,7 +266,7 @@ export default {
               this.price = '';
               this.description = '';
               this.address = '';
-              this.selectedOption = '';
+              this.selectedOption = true;
 
             }
           })
@@ -125,6 +277,12 @@ export default {
             }, 4000,)
 
           });
+    },
+    FormUpdate(){
+
+    },
+    FormDelete(){
+
     },
   }
 }

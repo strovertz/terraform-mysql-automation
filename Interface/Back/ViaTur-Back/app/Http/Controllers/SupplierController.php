@@ -1,34 +1,31 @@
 <?php
 
-namespace App\Http\Controllers\SupplierController;
+namespace App\Http\Controllers;
 
 use App\Models\Supplier;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
-
-class SupplierController extends Controller
+class SupplierController
 {
-    public function update(Request $request)
+    public function post(Request $request) : jsonResponse
     {
+        error_log("aqui");
         $form = new Supplier($request->only(['data','price','description','address','selectedOption']));
         $insert = $form->save();
 
         if ($insert) {
-            return response(status: 200);
+            return response()->json('deu certo','200');
         } else {
-            return response(status: 500);
+            return response()->json(status: 500);
         }
     }
-    public function store(Request $request)
-    {
-        $form = new Supplier($request->only(['data','price','description','address','selectedOption']));
-        $insert = $form->save();
 
-        if ($insert) {
-            return response('deu certo','200');
-        } else {
-            return response(status: 500);
-        }
+    public function index(Request $request) : jsonResponse
+    {
+
+            return response()->json('deu certo','200');
+
     }
 }

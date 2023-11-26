@@ -5,7 +5,7 @@ import App from './App.vue'
 import router from './router'
 import axios from 'axios'
 const instance = axios.create({
-  baseURL: 'http://localhost:5173'
+  baseURL: 'http://127.0.0.1:8000/'
 });
 
 import './assets/main.css'
