@@ -74,11 +74,15 @@ def insert_data(nome_tabela, caminho_csv):
         # Adiciona 'created_act' ao cabeçalho
         cabecalho.append('created_act')
 
-        #create_table(nome_tabela, cabecalho)
+        create_table(nome_tabela, cabecalho)
 
         for linha in leitor_csv:
-            # Adiciona o timestamp atual para 'created_act'
-            linha.append(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+            # Preenche 'created_act' com o timestamp atual se necessário
+            if len(linha) < len(cabecalho):
+                linha.append(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+
+            # Garante que a lista 'linha' tenha o mesmo número de elementos que o cabeçalho
+            linha = linha + [''] * (len(cabecalho) - len(linha))
 
             valores = ', '.join(['%s' for _ in linha])
             query = f"INSERT INTO {nome_tabela} VALUES ({valores})"
@@ -93,7 +97,6 @@ def main():
     create_table_servicos()
 
     insert_data('clientes', './clientes.csv')
-    insert_data('servicos', './servicos.csv')
 
     print('Tabelas e dados importados com sucesso!')
 
