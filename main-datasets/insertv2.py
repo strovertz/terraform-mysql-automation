@@ -15,7 +15,6 @@ def create_database():
 
     cursor.execute("CREATE DATABASE IF NOT EXISTS agencia_turismo")
     conn.commit()
-
     conn.close()
 
 def create_table_clientes():
@@ -63,6 +62,16 @@ def create_table_servicos():
 
     conn.close()
 
+def create_table(nome_tabela, cabecalho):
+    conn = mysql.connector.connect(**db_config)
+    cursor = conn.cursor()
+
+    colunas = ', '.join([f'{nome_coluna} VARCHAR(255)' for nome_coluna in cabecalho])
+    cursor.execute(f"CREATE TABLE IF NOT EXISTS {nome_tabela} ({colunas})")
+    conn.commit()
+
+    conn.close()
+
 def insert_data(nome_tabela, caminho_csv):
     conn = mysql.connector.connect(**db_config)
     cursor = conn.cursor()
@@ -74,7 +83,7 @@ def insert_data(nome_tabela, caminho_csv):
         # Adiciona 'created_act' ao cabeçalho
         cabecalho.append('created_act')
 
-        #create_table(nome_tabela, cabecalho)
+        create_table(nome_tabela, cabecalho)
 
         for linha in leitor_csv:
             # Preenche 'created_act' com o timestamp atual se necessário
@@ -100,6 +109,10 @@ def main():
     create_table_servicos()
 
     insert_data('clientes', './clientes.csv')
+    insert_data('fornecedores', './fornecedores.csv')
+    insert_data('servicos', './servicos.csv')
+    insert_data('pedidos', './pedidos.csv')
+    insert_data('itens_pedido', './itens_pedido.csv')
 
     print('Tabelas e dados importados com sucesso!')
 
