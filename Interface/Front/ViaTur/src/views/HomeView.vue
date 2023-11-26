@@ -226,8 +226,6 @@
 
 <script>
 import {instance} from '@/main';
-import axios from 'axios';
-
 export default {
   name: 'home',
 
@@ -262,10 +260,10 @@ export default {
     FormSend: function () {
       instance.post('supplier', {
         'data': this.data,
-        'price': this.price,
-        'description': this.description,
-        'address': this.address,
-        'option': this.selectedOption,
+        'valor': this.price,
+        'descricao': this.description,
+        'endereco': this.address,
+        'tipo_servico': this.selectedOption,
       })
           .then((response) => {
             if (response) {

@@ -15,28 +15,28 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Carbon $deleted_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
- * @property string $nameSupplier
- * @property float $priceService
- * @property string $descriptionService
- * @property string $selectedOptionService
- * @property string $addressService
- * @property mixed $dataService
+ * @property string $nome
+ * @property float $valor
+ * @property string $tipo_servico
+ * @property string $endereco
+ * @property string $descricao
+ * @property mixed $data
  */
 
 class Supplier extends Model
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
-    public $primaryKey = 'supplier_id';
+    public $primaryKey = 'id';
 
-    public $table = 'fornecedores';
+    public $table = 'servicos';
     public $fillable = [
-        'nameSupplier',
-        'dataService',
-        'priceService',
-        'descriptionService',
-        'addressService',
-        'selectedOptionService',
+        'nome',
+        'data',
+        'valor',
+        'descricao',
+        'endereco',
+        'tipo_servico',
     ];
 
     protected $hidden = [
