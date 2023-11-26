@@ -1,4 +1,4 @@
-id,nome,email,telefone,updated_act,deleted_act
+id,nome,email,telefone,genero,cpf,endereco,data_nasc,updated_act,deleted_act
 1,João,joao@email.com,123456789
 2,Maria,maria@email.com,987654321
 3,Carlos,carlos@email.com,555555555
