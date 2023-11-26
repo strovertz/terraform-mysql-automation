@@ -1,4 +1,4 @@
-id,cliente_id,data_pedido,total,modalidade_pagamento,created_act,updated_act,deleted_act
+id,cliente_id,data_pedido,total,modalidade_pagamento,updated_act,deleted_act
 1,1,2023-01-01,500.00,Cartão
 2,2,2023-01-02,800.00,Transferência
 3,3,2023-01-03,300.00,Boleto
