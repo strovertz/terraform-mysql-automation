@@ -24,9 +24,9 @@ sudo systemctl start mysql
 sudo grafana-cli admin reset-admin-password Gleison123@
 
 # Configuração do MySQL
-sudo mysql -u root <<EOF
-ALTER USER 'root'@'localhost' IDENTIFIED BY 'root';
-EOF
+    sudo mysql -u root <<EOF
+    ALTER USER 'root'@'localhost' IDENTIFIED BY 'root';
+    EOF
 
 # Instalação do pip e pacotes Python
 sudo apt-get install -y python3-pip

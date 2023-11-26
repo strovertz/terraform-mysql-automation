@@ -1,4 +1,4 @@
-id,nome,email,telefone
+id,nome,email,telefone,created_act,updated_act,deleted_act
 1,João,joao@email.com,123456789
 2,Maria,maria@email.com,987654321
 3,Carlos,carlos@email.com,555555555

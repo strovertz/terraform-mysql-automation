@@ -1,4 +1,4 @@
-id,nome,tipo_servico
+id,nome,tipo_servico,created_act,updated_act,deleted_act
 1,Hotel X,Hospedagem
 2,Companhia,Passagem
 3,Aluguel de Carros,Transporte
