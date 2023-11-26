@@ -81,8 +81,8 @@ def insert_data(nome_tabela, caminho_csv):
             if len(linha) < len(cabecalho):
                 linha.append(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
 
-            # Garante que a lista 'linha' tenha o mesmo número de elementos que o cabeçalho
-            linha = linha + [''] * (len(cabecalho) - len(linha))
+            # Garante que o número de valores na lista 'linha' corresponda ao número de colunas no cabeçalho
+            linha = linha[:len(cabecalho)]
 
             valores = ', '.join(['%s' for _ in linha])
             query = f"INSERT INTO {nome_tabela} VALUES ({valores})"
