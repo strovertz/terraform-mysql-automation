@@ -3,26 +3,26 @@
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a class="navbar-item">
-          <h1 class="title"><strong>ViaTur</strong></h1><p class="subtitle">Sua melhor escolha para turismo</p>
+          <h1 class="title"><strong>ViaTur</strong><br><p class="subtitle">Sua melhor escolha para turismo</p></h1>
+
         </a>
       </div>
     </nav>
 
-    <div class="UserPanel">
-      <h2>Compre aqui um serviço</h2>
+    <div class="box">
+      <h2 class="title">Compre aqui um serviço</h2>
       <div>
 
       </div>
     </div>
-    <div class="SupplierPanel">
-      <h2>Anuncie aqui seu serviço</h2>
+    <div class="box">
+      <h2 class="title">Anuncie aqui seu serviço</h2>
       <div>
-        <form class="box">
-
+        <form>
           <div class="field">
             <label class="label">Fornecedor</label>
             <div class="control">
-              <input class="input" type="text" placeholder="Text input">
+              <input class="input" type="text" placeholder="Diga o nome da sua empresa">
             </div>
           </div>
 
@@ -30,7 +30,7 @@
             <label class="label">Tipo de serviço</label>
             <div class="control">
               <div class="select">
-                <select>
+                <select v-model="selectedOption">
                   <option>Passagem Aerea</option>
                   <option>Aluguel de carro</option>
                   <option>Reserva de hotel</option>
@@ -45,21 +45,21 @@
           <div class="field">
             <label class="label">Valor do serviço</label>
             <div class="control">
-              <input class="input" v-model="price" type="text" placeholder="Text input">
+              <input class="input" v-model="price" type="text" placeholder="Digite o valor">
             </div>
           </div>
 
           <div class="field">
             <label class="label">Endereço</label>
             <div class="control">
-              <input class="input" type="text" v-model="address" placeholder="Text input">
+              <input class="input" type="text" v-model="address" placeholder="Digite o endereço">
             </div>
           </div>
 
           <div class="field">
             <label class="label">Data</label>
             <div class="control">
-              <input class="input" type="text" v-model="data" placeholder="Text input">
+              <input class="input" type="date" v-model="data" placeholder="Digite a data">
             </div>
           </div>
 
@@ -70,12 +70,14 @@
             </div>
           </div>
           <div class="control">
-            <button class="button is-link" @click="formSend" >Enviar</button>
+            <button class="button is-link" @click="formSend" >Adicionar</button>
           </div>
         </form>
       </div>
     </div>
-    <div></div>
+    <div class="box">
+
+    </div>
   </main>
 </template>
 
@@ -93,31 +95,33 @@ export default {
       price: '',
       description: '',
       address: '',
+      selectedOption: '',
     }
   },
   methods: {
     formSend: function () {
+      alert(this.selectedOption);
       instance.post('/form', {
-        'email': this.mail,
-        'phone': this.phone,
-        'msg': this.msg,
-        'name': this.name
+        'data': this.data,
+        'price': this.price,
+        'description': this.description,
+        'address': this.address,
+        'option': this.selectedOption,
       })
           .then((response) => {
             if (response) {
-              this.name = '';
-              this.phone = '';
-              this.mail = '';
-              this.msg = '';
-              this.confirmation = true;
-              this.hidden = false;
+              this.data = '';
+              this.price = '';
+              this.description = '';
+              this.address = '';
+              this.selectedOption = '';
+
             }
           })
           .catch((error) => {
-            this.errorSend = true;
-            this.errorMsg = error;
+            alert(error);
             setTimeout(() => {
-              this.errorSend = false;
+
             }, 4000,)
 
           });
@@ -125,3 +129,15 @@ export default {
   }
 }
 </script>
+
+
+<style scoped>
+
+nav {
+  background-color: #b3d7ff ;
+}
+
+textarea {
+  resize: none;
+}
+</style>
