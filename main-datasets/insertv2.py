@@ -112,7 +112,7 @@ def main():
     insert_data('fornecedores', './fornecedores.csv')
     insert_data('servicos', './servicos.csv')
     insert_data('pedidos', './pedidos.csv')
-    insert_data('itens_pedido', './itens_pedido.csv')
+    insert_data('itens_pedido', './itens_pedidos.csv')
 
     print('Tabelas e dados importados com sucesso!')
 
