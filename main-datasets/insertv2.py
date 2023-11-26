@@ -32,9 +32,9 @@ def create_table_clientes():
             cpf VARCHAR(14) NOT NULL,
             endereco VARCHAR(255) NOT NULL,
             data_nasc DATE NOT NULL,
-            created_act TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             updated_act TIMESTAMP,
-            deleted_act TIMESTAMP
+            deleted_act TIMESTAMP,
+            created_act TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     """)
     conn.commit()
@@ -54,9 +54,9 @@ def create_table_servicos():
             endereco VARCHAR(255),
             data DATE,
             descricao TEXT,
-            created_act TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             updated_act TIMESTAMP,
-            deleted_act TIMESTAMP
+            deleted_act TIMESTAMP,
+            created_act TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     """)
     conn.commit()
