@@ -74,7 +74,7 @@ def insert_data(nome_tabela, caminho_csv):
         # Adiciona 'created_act' ao cabeçalho
         cabecalho.append('created_act')
 
-        create_table(nome_tabela, cabecalho)
+        #create_table(nome_tabela, cabecalho)
 
         for linha in leitor_csv:
             # Preenche 'created_act' com o timestamp atual se necessário
