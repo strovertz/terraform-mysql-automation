@@ -241,7 +241,7 @@ export default {
     }
   },
   created() {
-    instance.get('/service')
+    instance.get('/supplier')
         .then((response) => {
           this.currentServices = response.data.enabled;
         })
