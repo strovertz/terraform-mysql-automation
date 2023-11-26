@@ -92,8 +92,8 @@ def main():
     create_table_clientes()
     create_table_servicos()
 
-    insert_data('clientes', '/tmp/clientes.csv')
-    insert_data('servicos', '/tmp/servicos.csv')
+    insert_data('clientes', './clientes.csv')
+    insert_data('servicos', './servicos.csv')
 
     print('Tabelas e dados importados com sucesso!')
 
