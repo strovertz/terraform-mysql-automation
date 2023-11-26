@@ -15,9 +15,11 @@ class SupplierManagerController extends Controller
 
     public function store(Request $request): JsonResponse
     {
-        $data = $request->validated();
-        $sup = Supplier::create($data);
-        $sup->save();
+
+        $sup = new Supplier();
+        $sup ->  = $request->input('email');
+        $sup ->
+        return $sup->save();
 
         return response()->json(['data' => $sup]);
     }

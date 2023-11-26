@@ -17,7 +17,7 @@
           <div class="field">
             <label class="label">Nome completo</label>
             <div class="control">
-              <input class="input" type="text" v-model="name" placeholder="Diga o nome da sua empresa">
+              <input class="input" type="text" v-model="nameUser" placeholder="Diga o nome da sua empresa">
             </div>
           </div>
 
@@ -36,21 +36,21 @@
           <div class="field">
             <label class="label">CPF</label>
             <div class="control">
-              <input class="input" v-model="price" type="text" placeholder="Digite o valor">
+              <input class="input" v-model="cpf" type="text" placeholder="Digite o valor">
             </div>
           </div>
 
           <div class="field">
             <label class="label">Endereço</label>
             <div class="control">
-              <input class="input" type="text" v-model="address" placeholder="Digite o endereço">
+              <input class="input" type="text" v-model="addressUser" placeholder="Digite o endereço">
             </div>
           </div>
 
           <div class="field">
             <label class="label">Data de Nascimento</label>
             <div class="control">
-              <input class="input" type="date" v-model="data" placeholder="Digite a data">
+              <input class="input" type="date" v-model="birthday" placeholder="Digite a data">
             </div>
           </div>
 
@@ -59,6 +59,7 @@
 
       <div>
         <section class="section" id="Services">
+        <!--
           <p class="column has-text-centered title">Nossos serviços</p>
           <div class=" has-text-centered ">
             <div class=" columns is-multiline is-centered">
@@ -70,6 +71,7 @@
               </article>
             </div>
           </div>
+        -->
         </section>
       </div>
     </div>
@@ -82,7 +84,7 @@
           <div class="field">
             <label class="label">Fornecedor</label>
             <div class="control">
-              <input class="input" type="text" v-model="name" placeholder="Diga o nome da sua empresa">
+              <input class="input" type="text" v-model="nameSupplier" placeholder="Diga o nome da sua empresa">
             </div>
           </div>
 
@@ -90,7 +92,7 @@
             <label class="label">Tipo de serviço</label>
             <div class="control">
               <div class="select">
-                <select v-model="selectedOption">
+                <select v-model="selectedOptionService">
                   <option>Passagem Aerea</option>
                   <option>Aluguel de carro</option>
                   <option>Reserva de hotel</option>
@@ -105,28 +107,28 @@
           <div class="field">
             <label class="label">Valor do serviço</label>
             <div class="control">
-              <input class="input" v-model="price" type="text" placeholder="Digite o valor">
+              <input class="input" v-model="priceService" type="text" placeholder="Digite o valor">
             </div>
           </div>
 
           <div class="field">
             <label class="label">Endereço</label>
             <div class="control">
-              <input class="input" type="text" v-model="address" placeholder="Digite o endereço">
+              <input class="input" type="text" v-model="addressService" placeholder="Digite o endereço">
             </div>
           </div>
 
           <div class="field">
             <label class="label">Data</label>
             <div class="control">
-              <input class="input" type="date" v-model="data" placeholder="Digite a data">
+              <input class="input" type="date" v-model="dataService" placeholder="Digite a data">
             </div>
           </div>
 
           <div class="field">
             <label class="label">Descrição</label>
             <div class="control">
-              <textarea class="textarea" v-model="description" placeholder="Textarea"></textarea>
+              <textarea class="textarea" v-model="descriptionService" placeholder="Textarea"></textarea>
             </div>
           </div>
           <div class="control">
@@ -153,7 +155,7 @@
               <label class="label">Tipo de serviço</label>
               <div class="control">
                 <div class="select">
-                  <select v-model="selectedOption">
+                  <select v-model="selectedOptionService">
                     <option>Passagem Aerea</option>
                     <option>Aluguel de carro</option>
                     <option>Reserva de hotel</option>
@@ -168,32 +170,32 @@
             <div class="field">
               <label class="label">Valor do serviço</label>
               <div class="control">
-                <input class="input" v-model="price" type="text" placeholder="Digite o valor">
+                <input class="input" v-model="priceService" type="text" placeholder="Digite o valor">
               </div>
             </div>
 
             <div class="field">
               <label class="label">Endereço</label>
               <div class="control">
-                <input class="input" type="text" v-model="address" placeholder="Digite o endereço">
+                <input class="input" type="text" v-model="addressService" placeholder="Digite o endereço">
               </div>
             </div>
 
             <div class="field">
               <label class="label">Data</label>
               <div class="control">
-                <input class="input" type="date" v-model="data" placeholder="Digite a data">
+                <input class="input" type="date" v-model="dataService" placeholder="Digite a data">
               </div>
             </div>
 
             <div class="field">
               <label class="label">Descrição</label>
               <div class="control">
-                <textarea class="textarea" v-model="description" placeholder="Textarea"></textarea>
+                <textarea class="textarea" v-model="descriptionService" placeholder="Textarea"></textarea>
               </div>
             </div>
             <div class="control">
-              <button class="button is-link" @click="FormUpdate" >Atualizar</button>
+              <button class="button is-link" @click="" >Atualizar</button>
             </div>
           </form>
         </div>
@@ -213,7 +215,7 @@
               </div>
             </div>
             <div class="control">
-              <button class="button is-link" @click="FormDelete" >Excluir</button>
+              <button class="button is-link" @click="" >Excluir</button>
             </div>
           </form>
         </div>
@@ -231,28 +233,33 @@ export default {
 
   data() {
     return {
-      name: '',
-      data: '',
-      price: '',
-      description: '',
-      address: '',
-      selectedOption: '',
-      serviceId: ''
+      nameSupplier: '',
+      dataService: '',
+      priceService: '',
+      descriptionService: '',
+      addressService: '',
+      selectedOptionService: '',
+      serviceId: '',
+      GenderSelectedOption: '',
+      birthday: '',
+      cpf: '',
+      addressUser: '',
+      nameUser: '',
     }
   },
   created() {
-    instance.get('/supplier')
+    instance.get('supplier')
+        /*
         .then((response) => {
           this.currentServices = response.data.enabled;
         })
         .catch((error) => {
           this.errorGetService = true;
           this.serviceErrorMsg = error;
-        })
+        })*/
   },
   methods: {
     FormSend: function () {
-      alert(this.selectedOption);
       instance.post('supplier', {
         'data': this.data,
         'price': this.price,
@@ -277,12 +284,6 @@ export default {
             }, 4000,)
 
           });
-    },
-    FormUpdate(){
-
-    },
-    FormDelete(){
-
     },
   }
 }

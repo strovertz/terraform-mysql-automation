@@ -15,11 +15,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Carbon $deleted_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
- * @property string $name
- * @property float $price
- * @property string $description
- * @property string $selectedOption
- * @property string $address
+ * @property string $nameSupplier
+ * @property float $priceService
+ * @property string $descriptionService
+ * @property string $selectedOptionService
+ * @property string $addressService
  * @property mixed $dataService
  */
 
@@ -31,12 +31,12 @@ class Supplier extends Model
 
     public $table = 'fornecedores';
     public $fillable = [
-        'name',
+        'nameSupplier',
         'dataService',
-        'price',
-        'description',
-        'address',
-        'selectedOption',
+        'priceService',
+        'descriptionService',
+        'addressService',
+        'selectedOptionService',
     ];
 
     protected $hidden = [
