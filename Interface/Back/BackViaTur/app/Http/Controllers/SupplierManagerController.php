@@ -8,7 +8,10 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 class SupplierManagerController extends Controller
 {
-
+    public function index(Request $request) : JsonResponse
+    {
+        return response()->json(1);
+    }
 
     public function store(Request $request): JsonResponse
     {
