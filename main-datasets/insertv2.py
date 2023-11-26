@@ -32,8 +32,8 @@ def create_table_clientes():
             cpf VARCHAR(14) NOT NULL,
             endereco VARCHAR(255) NOT NULL,
             data_nasc DATE NOT NULL,
-            updated_act TIMESTAMP,
-            deleted_act TIMESTAMP,
+            updated_act TIMESTAMP DEFAULT NULL,
+            deleted_act TIMESTAMP DEFAULT NULL,
             created_act TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     """)
@@ -54,8 +54,8 @@ def create_table_servicos():
             endereco VARCHAR(255),
             data DATE,
             descricao TEXT,
-            updated_act TIMESTAMP,
-            deleted_act TIMESTAMP,
+            updated_act TIMESTAMP DEFAULT NULL,
+            deleted_act TIMESTAMP DEFAULT NULL,
             created_act TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     """)
