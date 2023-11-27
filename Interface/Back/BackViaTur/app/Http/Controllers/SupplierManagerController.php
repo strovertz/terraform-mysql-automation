@@ -6,34 +6,40 @@ use App\Http\Controllers\Controller;
 use App\Models\Supplier;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 class SupplierManagerController extends Controller
 {
-    public function index(Request $request) : JsonResponse
+    public function index(Request $request): JsonResponse
     {
         return response()->json(1);
     }
 
     public function store(Request $request): JsonResponse
     {
-        $sup =  new Supplier();
-        $sup -> nome = $request->input('nameSupplier');
-        $sup -> tipo_servico =  $request->input('selectedOptionService');
-        $sup -> valor =  $request->input('priceService');
-        $sup -> descricao =  $request->input('descriptionService');
-        $sup -> endereco =  $request->input('addressService');
-        $sup -> data =  $request->input('dataService');
+        $sup = new Supplier();
+        $sup->nome = $request->input('nameSupplier');
+        $sup->tipo_servico = $request->input('selectedOptionService');
+        $sup->valor = $request->input('priceService');
+        $sup->descricao = $request->input('descriptionService');
+        $sup->endereco = $request->input('addressService');
+        $sup->tipo_pagamento = $request->input('selectedPayService');
+        $sup->data = \Carbon\Carbon::parse($request->input('dataService'))->format('Y/m/d');
         $sup->save();
 
-        return response()->json($sup);
+        return response()->json(['data_updated' => $request->all()], 200);
+
     }
 
     public function update(Request $request, int $id): JsonResponse
     {
-        $sup = Supplier::query()
-            ->where('Supplier_id', '=', $id)
-            ->update($request->all());
+        $data = $request->all();
 
-        if ($sup === 0) return response()->json(['errors' => ['status: 404', 'title: not found', 'detail : Brand with id ' . $id . ' not found']]);
+        $data['data'] = \Carbon\Carbon::parse($data['dataService'])->format('Y-m-d');
+
+        $supplier = Supplier::findOrFail($id);
+
+        $supplier->update($data);
 
         return response()->json(['data_updated' => $request->all(), 'id' => $id]);
     }
@@ -41,7 +47,7 @@ class SupplierManagerController extends Controller
     public function delete(int $id): JsonResponse
     {
         $dropSup = Supplier::query()
-            ->where('supplier_id', '=', $id)
+            ->where('id', '=', $id)
             ->delete();
 
         if ($dropSup === 0) return response()->json(['errors' => ['status: 404', 'title: not found', 'detail : Supplier with id ' . $id . ' not found']]);

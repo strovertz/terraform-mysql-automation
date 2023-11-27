@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
 
 
 /**
@@ -19,8 +19,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $endereco
  * @property string $descricao
  * @property mixed $data
+ * @property string $tipo_pagamento
  */
-
 class Supplier extends Model
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
@@ -35,6 +35,7 @@ class Supplier extends Model
         'descricao',
         'endereco',
         'tipo_servico',
+        'tipo_pagamento'
     ];
 
     protected $hidden = [
@@ -48,4 +49,37 @@ class Supplier extends Model
     ];
 
     const UPDATED_AT = null;
+
+    public function mapFrontendToDatabase($data)
+    {
+        $columnMapping = [
+            'nameSupplier' => 'nome',
+            'dataService' => 'data',
+            'priceService' => 'valor',
+            'descriptionService' => 'descricao',
+            'addressService' => 'endereco',
+            'selectedOptionService' => 'tipo_servico',
+            'selectedPayService' => 'tipo_pagamento',
+        ];
+
+        $columnsToUpdate = [];
+        foreach ($columnMapping as $frontendField => $dbColumn) {
+            if (isset($data[$frontendField])) {
+                $columnsToUpdate[$dbColumn] = $data[$frontendField];
+            }
+        }
+
+        return $columnsToUpdate;
+    }
+
+    public function updateSupplier($data, $id)
+    {
+        $columnsToUpdate = $this->mapFrontendToDatabase($data);
+
+        $sup = self::query()
+            ->where('id', '=', $id)
+            ->update($columnsToUpdate);
+
+        return $sup;
+    }
 }
