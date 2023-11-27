@@ -10,9 +10,13 @@ use Illuminate\Support\Facades\DB;
 
 class SupplierManagerController extends Controller
 {
-    public function index(Request $request): JsonResponse
+        public function index(Request $request): JsonResponse
     {
-        return response()->json(1);
+        $services = Supplier::query()
+            ->where('created_at', '!=' , null)
+            ->get();
+
+        return response()->json(['services' => $services]);
     }
 
     public function store(Request $request): JsonResponse

@@ -15,3 +15,10 @@ Route::prefix('supplier')->group(function (){
    Route::put('/{id}', [SupplierManagerController::class, 'update']);
    Route::delete('/{id}',[SupplierManagerController::class, 'delete']);
 });
+
+Route::prefix('user')->group(function (){
+    Route::get('', [SupplierManagerController::class, 'index']);
+    Route::post('',[SupplierManagerController::class, 'store']);
+    Route::put('/{id}', [SupplierManagerController::class, 'update']);
+    Route::delete('/{id}',[SupplierManagerController::class, 'delete']);
+});
