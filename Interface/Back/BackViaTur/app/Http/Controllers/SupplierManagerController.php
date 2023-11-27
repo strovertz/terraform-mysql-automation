@@ -15,7 +15,6 @@ class SupplierManagerController extends Controller
 
     public function store(Request $request): JsonResponse
     {
-
         $sup =  new Supplier();
         $sup -> nome = $request->input('nameSupplier');
         $sup -> tipo_servico =  $request->input('selectedOptionService');
@@ -25,13 +24,11 @@ class SupplierManagerController extends Controller
         $sup -> data =  $request->input('dataService');
         $sup->save();
 
-        dd($sup);
         return response()->json($sup);
     }
 
     public function update(Request $request, int $id): JsonResponse
     {
-
         $sup = Supplier::query()
             ->where('Supplier_id', '=', $id)
             ->update($request->all());

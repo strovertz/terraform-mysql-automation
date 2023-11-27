@@ -2,7 +2,6 @@
 
 namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Carbon\Carbon;
@@ -47,4 +46,6 @@ class Supplier extends Model
         'created_at' => 'datetime:d-m-Y',
         'deleted_at' => 'datetime:d-m-Y',
     ];
+
+    const UPDATED_AT = null;
 }
