@@ -15,7 +15,6 @@ def create_database():
 
     cursor.execute("CREATE DATABASE IF NOT EXISTS agencia_turismo")
     conn.commit()
-
     conn.close()
 
 def create_table_clientes():
@@ -24,7 +23,7 @@ def create_table_clientes():
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS clientes (
-            id INT NOT NULL PRIMARY KEY,
+            id INT AUTO_INCREMENT PRIMARY KEY,
             nome VARCHAR(255) NOT NULL,
             email VARCHAR(255),
             telefone VARCHAR(20),
@@ -32,9 +31,9 @@ def create_table_clientes():
             cpf VARCHAR(14) NOT NULL,
             endereco VARCHAR(255) NOT NULL,
             data_nasc DATE NOT NULL,
-            created_act TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            updated_act TIMESTAMP,
-            deleted_act TIMESTAMP
+            updated_at INT DEFAULT 0,
+            deleted_at INT DEFAULT 0,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     """)
     conn.commit()
@@ -47,18 +46,28 @@ def create_table_servicos():
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS servicos (
-            id INT NOT NULL PRIMARY KEY,
+            id INT AUTO_INCREMENT PRIMARY KEY,
             nome VARCHAR(255) NOT NULL,
             tipo_servico VARCHAR(255) NOT NULL,
             valor DECIMAL(10, 2) NOT NULL,
             endereco VARCHAR(255),
             data DATE,
             descricao TEXT,
-            created_act TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            updated_act TIMESTAMP,
-            deleted_act TIMESTAMP
-        )
-    """)
+            tipo_pagamento VARCHAR(255),
+            updated_at INT DEFAULT 0,
+            deleted_at INT DEFAULT 0,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )""")
+    conn.commit()
+
+    conn.close()
+
+def create_table(nome_tabela, cabecalho):
+    conn = mysql.connector.connect(**db_config)
+    cursor = conn.cursor()
+
+    colunas = ', '.join([f'{nome_coluna} VARCHAR(255)' for nome_coluna in cabecalho])
+    cursor.execute(f"CREATE TABLE IF NOT EXISTS {nome_tabela} ({colunas})")
     conn.commit()
 
     conn.close()
@@ -70,16 +79,26 @@ def insert_data(nome_tabela, caminho_csv):
     with open(caminho_csv, 'r') as arquivo_csv:
         leitor_csv = csv.reader(arquivo_csv)
         cabecalho = next(leitor_csv)
+
+        # Adiciona 'created_act' ao cabeçalho
+        cabecalho.append('created_act')
+
         create_table(nome_tabela, cabecalho)
 
         for linha in leitor_csv:
-            # Preenche 'created_act' com o timestamp atual se estiver vazio
-            if linha[cabecalho.index('created_act')] == '':
-                linha[cabecalho.index('created_act')] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            # Preenche 'created_act' com o timestamp atual se necessário
+            if len(linha) < len(cabecalho):
+                linha.append(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
 
-            valores = ', '.join(['%s' for _ in linha])
-            query = f"INSERT INTO {nome_tabela} VALUES ({valores})"
-            cursor.execute(query, linha)
+            # Garante que o número de valores na lista 'linha' corresponda ao número de colunas no cabeçalho
+            linha = linha[:len(cabecalho)]
+
+            try:
+                valores = ', '.join(['%s' for _ in linha])
+                query = f"INSERT INTO {nome_tabela} VALUES ({valores})"
+                cursor.execute(query, linha)
+            except Exception as e:
+                print(f"Erro ao inserir linha {linha} na tabela {nome_tabela}: {e}")
 
     conn.commit()
     conn.close()
@@ -89,8 +108,11 @@ def main():
     create_table_clientes()
     create_table_servicos()
 
-    insert_data('clientes', '/tmp/clientes.csv')
-    insert_data('servicos', '/tmp/servicos.csv')
+    insert_data('clientes', './clientes.csv')
+    insert_data('fornecedores', './fornecedores.csv')
+    insert_data('servicos', './servicos.csv')
+    insert_data('pedidos', './pedidos.csv')
+    insert_data('itens_pedido', './itens_pedidos.csv')
 
     print('Tabelas e dados importados com sucesso!')
 
