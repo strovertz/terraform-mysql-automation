@@ -31,6 +31,7 @@ def create_table_clientes():
             cpf VARCHAR(14) NOT NULL,
             endereco VARCHAR(255) NOT NULL,
             data_nasc DATE NOT NULL,
+            senha VARCHAR(255) NOT NULL,
             updated_act INT DEFAULT 0,
             deleted_act INT DEFAULT 0,
             created_act TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -53,6 +54,23 @@ def create_table_servicos():
             endereco VARCHAR(255),
             data DATE,
             descricao TEXT,
+            updated_act INT DEFAULT 0,
+            deleted_act INT DEFAULT 0,
+            created_act TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+    conn.commit()
+
+    conn.close()
+
+def create_table_itens():
+    conn = mysql.connector.connect(**db_config)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS itens (
+            id INT NOT NULL PRIMARY KEY,
+            valor_produto FLOAT NOT NULL,
             updated_act INT DEFAULT 0,
             deleted_act INT DEFAULT 0,
             created_act TIMESTAMP DEFAULT CURRENT_TIMESTAMP
