@@ -14,11 +14,12 @@ class ItensController extends Controller
     {
         $id = UserModel::query()
             ->where('email', '=', $request->input('userMail'))
-            ->get('id');
+            ->value('id');
 
         $dataSave = new Itens();
         $dataSave ->id_servico = $request->input('serviceId');
         $dataSave ->id_cliente = $id;
+        $dataSave ->valor_produto = $request->input('servicePrice');
         $dataSave ->save();
 
         return response()->json($dataSave,200);

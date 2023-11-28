@@ -26,15 +26,6 @@ class UserManagerController extends Controller
     public function store (Request $request): JsonResponse
     {
 
-        $request->validate([
-            'email' => [
-                'required',
-                'email',
-                Rule::unique('clientes', 'email'),
-            ],
-        ]);
-
-
         $user = new UserModel();
         $user->nome = $request->input('nameUser');
         $user->senha = $request->input('password');

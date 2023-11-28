@@ -21,7 +21,7 @@
               <p>forma de pagamento: {{services.tipo_pagamento}}</p>
               <p>data partida: {{services.data}}</p>
               <p >fornecedor: {{ services.nome }}</p>
-              <button class="button" @click="buy(services.id)">Comprar</button>
+              <button class="button" @click="buy(services.id, services.valor)">Comprar</button>
             </article>
           </div>
         </div>
@@ -57,11 +57,13 @@ export default {
   },
   methods: {
 
-    buy: function (serviceId){
+    buy: function (serviceId, servicePrice){
       this.userMail = Cookies.get('email');
       instance.post('service', {
         serviceId,
         'userMail' : this.userMail,
+        servicePrice
+
       })
           .then((Response)=>{
             alert('Produto no carrinho')
