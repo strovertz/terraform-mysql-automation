@@ -7,8 +7,13 @@
             <span v-if="errorGetService" class="">{{ serviceErrorMsg }}</span>
             <article class="column is-one-third box mosaicService" v-for="services in currentServices" :key="services.id">
               <i></i>
-              <p class="title">{{ services.nome }}</p>
-              <p class="subtitle">{{ services.valor }}</p>
+              <p class="title">{{services.tipo_servico}}</p>
+              <p>{{services.descricao}}</p>
+              <p>valor: {{services.valor}}</p>
+              <p>forma de pagamento: {{services.tipo_pagamento}}</p>
+              <p>data partida: {{services.data}}</p>
+              <p >fornecedor: {{ services.nome }}</p>
+              <button class="button">Comprar</button>
             </article>
           </div>
         </div>

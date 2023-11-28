@@ -46,9 +46,8 @@ class Supplier extends Model
     public $casts = [
         'created_at' => 'datetime:d-m-Y',
         'deleted_at' => 'datetime:d-m-Y',
+        'updated_at' => 'datetime:d-m-Y',
     ];
-
-    const UPDATED_AT = null;
 
     public function mapFrontendToDatabase($data)
     {

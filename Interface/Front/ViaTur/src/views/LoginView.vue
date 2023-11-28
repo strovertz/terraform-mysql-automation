@@ -27,7 +27,7 @@
         </div>
         <div>
           <br>
-          <button class="button is-rounded is-light" @click="">Logar</button>
+          <button class="button is-rounded is-light" @click="Login">Logar</button>
         </div>
         <div>
           <br>
@@ -117,12 +117,28 @@ export default {
       addressUser: '',
       nameUser: '',
       creatPanel: 0,
+      email: '',
+      password: '',
     }
   },
   methods: {
     createAccountStep: function () {
       this.creatPanel = 1;
-    }
+    },
+    Login: function (){
+      instance.get(`user/${this.email}/${this.password}`, )
+          .then((Response)=>{
+            alert('conta criada');
+
+
+          })
+          .catch((Response)=> {
+
+          });
+    },
+    CreateAccount: function (){
+
+    },
   }
 }
 </script>
