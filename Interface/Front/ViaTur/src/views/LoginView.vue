@@ -97,7 +97,7 @@
         </div>
 
 
-        <button class="button">Criar Conta</button>
+        <button class="button" @click="CreateAccount">Criar Conta</button>
       </div>
     </div>
   </main>
@@ -105,6 +105,7 @@
 
 <script>
 import {instance} from '@/main';
+import router from "@/router";
 
 export default {
   name: 'home',
@@ -126,8 +127,20 @@ export default {
       this.creatPanel = 1;
     },
     Login: function (){
-      instance.get(`user/${this.email}/${this.password}`, )
+
+    },
+    CreateAccount: function (){
+      instance.post(`userCreate`,{
+        'GenderSelectedOption': this.GenderSelectedOption,
+        'birthday': this.birthday,
+        'cpf': this.cpf,
+        'addressUser': this.addressUser,
+        'nameUser': this.email,
+        'email': this.email,
+        'password': this.email,
+      })
           .then((Response)=>{
+            console.log(Response)
             alert('conta criada');
 
 
@@ -135,9 +148,6 @@ export default {
           .catch((Response)=> {
 
           });
-    },
-    CreateAccount: function (){
-
     },
   }
 }
