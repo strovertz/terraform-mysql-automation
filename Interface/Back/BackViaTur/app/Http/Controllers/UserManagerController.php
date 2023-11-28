@@ -10,8 +10,15 @@ class UserManagerController extends Controller
 {
     public function index(Request $request): JsonResponse
     {
+        $email = $request->input('email');
+        $password = $request->input('password');
 
-        return response()->json(['data_updated' => $request->all()], 200);
+        $user = UserModel::query()
+            ->where('email',  $email)
+            ->where('senha' , $password)
+            ->firstOrFail();
+
+        return response()->json(`data : ${user}`, 200);
     }
 
     public function store (Request $request): JsonResponse

@@ -5,6 +5,7 @@
         <a class="navbar-item">
           <h1 class="title"><strong>ViaTur</strong><br>Sua melhor escolha para turismo</h1>
         </a>
+
         <button class="button" ><RouterLink to="/fornecedores" >area do fornecedor</RouterLink></button>
       </div>
     </nav>
@@ -96,8 +97,9 @@
             <input class="input" v-model="password" type="text" placeholder="Digite o valor">
           </div>
         </div>
-
-
+        <div>
+          <span v-if="verifyLog">verifique se os dados estão corretos</span>
+        </div>
         <button class="button" @click="CreateAccount">Criar Conta</button>
       </div>
     </div>
@@ -121,6 +123,7 @@ export default {
       creatPanel: 0,
       email: '',
       password: '',
+      verifyLog: false,
     }
   },
   methods: {
@@ -130,10 +133,12 @@ export default {
     Login: function (){
       instance.get('userCreate',  {params: {email: this.email, password: this.password}})
           .then((Response)=>{
-
+            router.push({path: '/compra-de-servico'});
           })
           .catch((Response)=>{
-
+            window.setTimeout(()=> {
+              this.verifyLog = true;
+            }, 2000)
           });
     },
     CreateAccount: function (){
@@ -142,18 +147,19 @@ export default {
         'birthday': this.birthday,
         'cpf': this.cpf,
         'addressUser': this.addressUser,
-        'nameUser': this.email,
+        'nameUser': this.nameUser,
         'email': this.email,
-        'password': this.email,
+        'password': this.password,
       })
           .then((Response)=>{
             console.log(Response)
             alert('conta criada');
             router.push({path: '/compra-de-servico'});
-
           })
-          .catch((Response)=> {
-
+          .catch((error)=> {
+              window.setTimeout(()=>{
+                this.verifyLog = true;
+            }, 2000)
           });
     },
   }
