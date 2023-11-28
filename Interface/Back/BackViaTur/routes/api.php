@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ServiceManagerController;
+use App\Http\Controllers\ItensController;
 use App\Http\Controllers\SupplierManagerController;
 use App\Http\Controllers\UserManagerController;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +18,6 @@ Route::prefix('userCreate')->group(function (){
 });
 
 Route::prefix('service')->group(function (){
-    Route::get('',[ServiceManagerController::class, 'store']);
-    Route::post('',[ServiceManagerController::class, 'store']);
+    Route::get('',[ItensController::class, 'index']);
+    Route::post('',[ItensController::class, 'store']);
 });

@@ -40,6 +40,7 @@ export default {
       currentServices: [],
       errorGetService: '',
       serviceErrorMsg: '',
+      userMail: '',
     }
   },
 
@@ -55,18 +56,18 @@ export default {
     })
   },
   methods: {
+
     buy: function (serviceId){
-      console.log(serviceId)
+      this.userMail = Cookies.get('email');
       instance.post('service', {
         serviceId,
-        userId
-
+        'userMail' : this.userMail,
       })
           .then((Response)=>{
-
+            alert('Produto no carrinho')
           })
           .catch((error)=>{
-
+            alert('Error ao comprar')
       })
     }
   }

@@ -135,12 +135,10 @@ export default {
       instance.get('userCreate',  {params: {email: this.email, password: this.password}})
           .then((Response)=>{
             console.log(Response.data.id)
-            Cookies.set('passwordUser', this.password);
             Cookies.set('email', this.email);
-            Cookies.set('userId', Response.data.id)
             router.push({path: '/compra-de-servico'});
           })
-          .catch((Response)=>{
+          .catch((error)=>{
             window.setTimeout(()=> {
               this.verifyLog = true;
             }, 2000)
@@ -157,9 +155,7 @@ export default {
         'password': this.password,
       })
           .then((Response)=>{
-            console.log(Response)
             alert('conta criada');
-            Cookies.set('passwordUser', this.password);
             Cookies.set('email', this.email);
             router.push({path: '/compra-de-servico'});
           })
