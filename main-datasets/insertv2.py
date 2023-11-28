@@ -31,13 +31,13 @@ def create_table_clientes():
             cpf VARCHAR(14) NOT NULL,
             endereco VARCHAR(255) NOT NULL,
             data_nasc DATE NOT NULL,
+            senha VARCHAR(255) NOT NULL,
             updated_act INT DEFAULT 0,
             deleted_act INT DEFAULT 0,
             created_act TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     """)
     conn.commit()
-
     conn.close()
 
 def create_table_servicos():
@@ -53,13 +53,33 @@ def create_table_servicos():
             endereco VARCHAR(255),
             data DATE,
             descricao TEXT,
+            tipo_pagamento VARCHAR(255),
             updated_act INT DEFAULT 0,
             deleted_act INT DEFAULT 0,
             created_act TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     """)
     conn.commit()
+    conn.close()
 
+def create_table_itens():
+    conn = mysql.connector.connect(**db_config)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS itens (
+            id INT NOT NULL PRIMARY KEY,
+            id_servico INT,
+            id_cliente INT,
+            FOREIGN KEY (id_servico) REFERENCES servicos(id),
+            FOREIGN KEY (id_cliente) REFERENCES clientes(id),
+            valor_produto FLOAT NOT NULL,
+            updated_act INT DEFAULT 0,
+            deleted_act INT DEFAULT 0,
+            created_act TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+    conn.commit()
     conn.close()
 
 def create_table(nome_tabela, cabecalho):
@@ -86,11 +106,9 @@ def insert_data(nome_tabela, caminho_csv):
         create_table(nome_tabela, cabecalho)
 
         for linha in leitor_csv:
-            # Preenche 'created_act' com o timestamp atual se necessário
             if len(linha) < len(cabecalho):
                 linha.append(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
 
-            # Garante que o número de valores na lista 'linha' corresponda ao número de colunas no cabeçalho
             linha = linha[:len(cabecalho)]
 
             try:
@@ -107,7 +125,8 @@ def main():
     create_database()
     create_table_clientes()
     create_table_servicos()
-
+    create_table_itens()
+    
     insert_data('clientes', './clientes.csv')
     insert_data('fornecedores', './fornecedores.csv')
     insert_data('servicos', './servicos.csv')
