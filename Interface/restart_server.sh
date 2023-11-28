@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 
 echo cd /var/www/html/Interface/Front/ViaTur
 
