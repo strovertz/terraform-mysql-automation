@@ -68,6 +68,8 @@ def create_table_itens():
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS itens (
             id INT NOT NULL PRIMARY KEY,
+            id_servico INT,
+            id_cliente INT,
             FOREIGN KEY (id_servico) REFERENCES servicos(id),
             FOREIGN KEY (id_cliente) REFERENCES clientes(id),
             valor_produto FLOAT NOT NULL,
