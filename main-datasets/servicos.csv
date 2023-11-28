@@ -1,11 +1,11 @@
-id,nome,tipo_servico,valor,endereco,data,descricao,updated_act,deleted_act
-1,1,1,500.00,a,2023-01-01,Cartão,0,0
-2,2,2,800.00,a,2023-01-02,Transferência,0,0
-3,3,3,300.00,s,2023-01-03,Boleto,0,0
-4,4,4,150.00,,2023-01-04,Boleto,0,0
-5,5,5,1200.00,,2023-01-05,Cartão,0,0
-6,6,6,1000.00,,2023-01-06,Transferência,0,0
-7,7,7,700.00,,2023-01-07,Cartão,0,0
-8,8,8,200.00,,2023-01-08,Boleto,0,0
-9,9,9,400.00,,2023-01-09,Transferência,0,0
-10,10,10,600.00,,2023-01-10,Cartão,0,0
+id,nome,tipo_servico,valor,endereco,data,descricao,tipo_pagamento,updated_act,deleted_act
+1,1,1,500.00,a,2023-01-01,Cartão,Débito,0,0
+2,2,2,800.00,a,2023-01-02,Débito,Transferência,0,0
+3,3,3,300.00,s,2023-01-03,Boleto,Crédito 2x,0,0
+4,4,4,150.00,,2023-01-04,Boleto,Crédito 2x,0,0
+5,5,5,1200.00,,2023-01-05,Cartão,Crédito 2x,0,0
+6,6,6,1000.00,,2023-01-06,Transferência,Crédito 2x,0,0
+7,7,7,700.00,,2023-01-07,Cartão,Crédito 2x,0,0
+8,8,8,200.00,,2023-01-08,Boleto,Crédito 2x,0,0
+9,9,9,400.00,,2023-01-09,Transferência,Pix,0,0
+10,10,10,600.00,,2023-01-10,Cartão,,Débito,0,0
