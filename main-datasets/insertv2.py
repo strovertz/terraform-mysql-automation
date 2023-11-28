@@ -53,6 +53,7 @@ def create_table_servicos():
             endereco VARCHAR(255),
             data DATE,
             descricao TEXT,
+            tipo_pagamento VARCHAR(255),
             updated_act INT DEFAULT 0,
             deleted_act INT DEFAULT 0,
             created_act TIMESTAMP DEFAULT CURRENT_TIMESTAMP
