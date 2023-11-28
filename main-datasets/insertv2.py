@@ -122,7 +122,8 @@ def main():
     create_database()
     create_table_clientes()
     create_table_servicos()
-
+    create_table_itens()
+    
     insert_data('clientes', './clientes.csv')
     insert_data('fornecedores', './fornecedores.csv')
     insert_data('servicos', './servicos.csv')
