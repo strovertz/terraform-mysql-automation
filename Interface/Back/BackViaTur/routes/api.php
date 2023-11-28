@@ -16,3 +16,7 @@ Route::prefix('userCreate')->group(function (){
     Route::get('', [UserManagerController::class, 'index']);
     Route::post('',[UserManagerController::class, 'store']);
 });
+
+Route::prefix('UserSupplier')->group(function (){
+
+})

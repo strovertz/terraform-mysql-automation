@@ -5,27 +5,39 @@ namespace App\Http\Controllers;
 use App\Models\UserModel;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
 
 class UserManagerController extends Controller
 {
     public function index(Request $request): JsonResponse
     {
         $email = $request->input('email');
-        $password = $request->input('password');
+        $password = Hash::make($request->input('password'));
 
         $user = UserModel::query()
             ->where('email',  $email)
             ->where('senha' , $password)
             ->firstOrFail();
 
-        return response()->json(`data : ${user}`, 200);
+        return response()->json(['data ' => $user], 200);
     }
 
     public function store (Request $request): JsonResponse
     {
+
+        $request->validate([
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('clientes', 'email'),
+            ],
+        ]);
+
+
         $user = new UserModel();
         $user->nome = $request->input('nameUser');
-        $user->senha = $request->input('password');
+        $user->senha = Hash::make($request->input('password'));
         $user->email = $request->input('email');
         $user->telefone = $request->input('phone');
         $user->genero = $request->input('GenderSelectedOption');
