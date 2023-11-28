@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\ServiceManagerController;
 use App\Http\Controllers\SupplierManagerController;
 use App\Http\Controllers\UserManagerController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('supplier')->group(function (){
@@ -17,6 +17,7 @@ Route::prefix('userCreate')->group(function (){
     Route::post('',[UserManagerController::class, 'store']);
 });
 
-Route::prefix('UserSupplier')->group(function (){
-
-})
+Route::prefix('service')->group(function (){
+    Route::get('',[ServiceManagerController::class, 'store']);
+    Route::post('',[ServiceManagerController::class, 'store']);
+});

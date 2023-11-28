@@ -32,6 +32,7 @@
 
 <script>
 import {instance} from '@/main.js';
+import Cookies from 'js-cookie'
 export default {
   name: 'compra-servicos',
   data() {
@@ -54,8 +55,19 @@ export default {
     })
   },
   methods: {
-    buy: function (){
-      instance.post('')
+    buy: function (serviceId){
+      console.log(serviceId)
+      instance.post('service', {
+        serviceId,
+        userId
+
+      })
+          .then((Response)=>{
+
+          })
+          .catch((error)=>{
+
+      })
     }
   }
 }

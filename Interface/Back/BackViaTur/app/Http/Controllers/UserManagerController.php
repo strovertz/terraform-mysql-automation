@@ -13,7 +13,7 @@ class UserManagerController extends Controller
     public function index(Request $request): JsonResponse
     {
         $email = $request->input('email');
-        $password = Hash::make($request->input('password'));
+        $password = $request->input('password');
 
         $user = UserModel::query()
             ->where('email',  $email)
@@ -37,7 +37,7 @@ class UserManagerController extends Controller
 
         $user = new UserModel();
         $user->nome = $request->input('nameUser');
-        $user->senha = Hash::make($request->input('password'));
+        $user->senha = $request->input('password');
         $user->email = $request->input('email');
         $user->telefone = $request->input('phone');
         $user->genero = $request->input('GenderSelectedOption');

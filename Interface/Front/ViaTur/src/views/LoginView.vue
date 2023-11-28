@@ -109,6 +109,7 @@
 <script>
 import {instance} from '@/main';
 import router from "@/router";
+import Cookies from 'js-cookie'
 
 export default {
   name: 'home',
@@ -133,6 +134,10 @@ export default {
     Login: function (){
       instance.get('userCreate',  {params: {email: this.email, password: this.password}})
           .then((Response)=>{
+            console.log(Response.data.id)
+            Cookies.set('passwordUser', this.password);
+            Cookies.set('email', this.email);
+            Cookies.set('userId', Response.data.id)
             router.push({path: '/compra-de-servico'});
           })
           .catch((Response)=>{
@@ -154,6 +159,8 @@ export default {
           .then((Response)=>{
             console.log(Response)
             alert('conta criada');
+            Cookies.set('passwordUser', this.password);
+            Cookies.set('email', this.email);
             router.push({path: '/compra-de-servico'});
           })
           .catch((error)=> {
