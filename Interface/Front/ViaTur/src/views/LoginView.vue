@@ -5,6 +5,7 @@
         <a class="navbar-item">
           <h1 class="title"><strong>ViaTur</strong><br>Sua melhor escolha para turismo</h1>
         </a>
+        <button class="button" ><RouterLink to="/fornecedores" >area do fornecedor</RouterLink></button>
       </div>
     </nav>
     <div v-if="creatPanel===0" class="section columns is-fullheight  is-centered">
@@ -127,7 +128,13 @@ export default {
       this.creatPanel = 1;
     },
     Login: function (){
+      instance.get('userCreate',  {params: {email: this.email, password: this.password}})
+          .then((Response)=>{
 
+          })
+          .catch((Response)=>{
+
+          });
     },
     CreateAccount: function (){
       instance.post(`userCreate`,{
@@ -142,7 +149,7 @@ export default {
           .then((Response)=>{
             console.log(Response)
             alert('conta criada');
-
+            router.push({path: '/compra-de-servico'});
 
           })
           .catch((Response)=> {

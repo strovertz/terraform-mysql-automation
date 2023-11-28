@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class UserManagerController extends Controller
 {
+    public function index(Request $request): JsonResponse
+    {
+
+        return response()->json(['data_updated' => $request->all()], 200);
+    }
 
     public function store (Request $request): JsonResponse
     {
