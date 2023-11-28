@@ -8,4 +8,4 @@ id,nome,tipo_servico,valor,endereco,data,descricao,tipo_pagamento,updated_act,de
 7,7,7,700.00,,2023-01-07,Cartão,Crédito 2x,0,0
 8,8,8,200.00,,2023-01-08,Boleto,Crédito 2x,0,0
 9,9,9,400.00,,2023-01-09,Transferência,Pix,0,0
-10,10,10,600.00,,2023-01-10,Cartão,,Débito,0,0
+10,10,10,600.00,,2023-01-10,Cartão,Débito,0,0
