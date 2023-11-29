@@ -109,7 +109,6 @@ def create_additional_triggers():
     conn.close()
 
 def main():
-    create_database()
     create_additional_triggers()
 
     print('Triggers adicionais criados com sucesso!')
