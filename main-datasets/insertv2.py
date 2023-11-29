@@ -32,9 +32,9 @@ def create_table_clientes():
             endereco VARCHAR(255) NOT NULL,
             data_nasc DATE NOT NULL,
             senha VARCHAR(255) NOT NULL,
-            updated_act INT DEFAULT 0,
-            deleted_act INT DEFAULT 0,
-            created_act TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            updated_at TIMESTAMP,
+            deleted_at TIMESTAMP,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     """)
     conn.commit()
@@ -54,9 +54,9 @@ def create_table_servicos():
             data DATE,
             descricao TEXT,
             tipo_pagamento VARCHAR(255),
-            updated_act INT DEFAULT 0,
-            deleted_act INT DEFAULT 0,
-            created_act TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            updated_at TIMESTAMP,
+            deleted_at TIMESTAMP,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     """)
     conn.commit()
@@ -74,9 +74,9 @@ def create_table_itens():
             FOREIGN KEY (id_servico) REFERENCES servicos(id),
             FOREIGN KEY (id_cliente) REFERENCES clientes(id),
             valor_produto FLOAT NOT NULL,
-            updated_act INT DEFAULT 0,
-            deleted_act INT DEFAULT 0,
-            created_act TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            updated_at TIMESTAMP,
+            deleted_at TIMESTAMP,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     """)
     conn.commit()
@@ -127,11 +127,9 @@ def main():
     create_table_servicos()
     create_table_itens()
     
-    insert_data('clientes', './clientes.csv')
-    insert_data('fornecedores', './fornecedores.csv')
-    insert_data('servicos', './servicos.csv')
-    insert_data('pedidos', './pedidos.csv')
-    insert_data('itens_pedido', './itens_pedidos.csv')
+    #insert_data('clientes', './clientes.csv')
+    #insert_data('fornecedores', './fornecedores.csv')
+    #insert_data('servicos', './servicos.csv')
 
     print('Tabelas e dados importados com sucesso!')
 
