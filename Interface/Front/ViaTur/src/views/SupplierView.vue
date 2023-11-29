@@ -1,5 +1,20 @@
 <template>
   <main>
+    <nav class="navbar box">
+      <div class="navbar-brand">
+        <div class="navbar-item ">
+          <router-link to="/"><img  src="https://th.bing.com/th/id/OIP.43PtV0ofraOOYDONHNAa8wHaFP?rs=1&pid=ImgDetMain.jpg" alt="Logo marca" style="width:42px;height:42px;"></router-link>
+          <h1 class="title">ViaTur - Sua melhor escolha para turismo</h1>
+        </div>
+      </div>
+      <div class="navbar-menu NavBar">
+        <ul class="navbar-end" id="navbarForms">
+          <li class="navbar-item">
+            <router-link to="/">Home</router-link>
+          </li>
+        </ul>
+      </div>
+    </nav>
     <div class="box">
       <h2 class="title">Anuncie aqui seu serviço</h2>
       <div>

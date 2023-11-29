@@ -1,12 +1,18 @@
 <template>
   <main>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <nav class="navbar box">
       <div class="navbar-brand">
-        <a class="navbar-item">
-          <h1 class="title"><strong>ViaTur</strong><br>Sua melhor escolha para turismo</h1>
-        </a>
-
-        <button class="button" ><RouterLink to="/fornecedores" >area do fornecedor</RouterLink></button>
+        <div class="navbar-item ">
+          <router-link to="/"><img  src="https://th.bing.com/th/id/OIP.43PtV0ofraOOYDONHNAa8wHaFP?rs=1&pid=ImgDetMain.jpg" alt="Logo marca" style="width:42px;height:42px;"></router-link>
+          <h1 class="title">ViaTur - Sua melhor escolha para turismo</h1>
+        </div>
+      </div>
+      <div class="navbar-menu NavBar">
+        <ul class="navbar-end" id="navbarForms">
+          <li class="navbar-item">
+            <router-link to="/fornecedores">Fornecedores</router-link>
+          </li>
+        </ul>
       </div>
     </nav>
     <div v-if="creatPanel===0" class="section columns is-fullheight  is-centered">
