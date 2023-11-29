@@ -23,7 +23,7 @@ def create_table_clientes():
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS clientes (
-            id AUTOINCREMENT PRIMARY KEY,
+            id INT AUTO_INCREMENT PRIMARY KEY,
             nome VARCHAR(255) NOT NULL,
             email VARCHAR(255),
             telefone VARCHAR(20),
@@ -46,7 +46,7 @@ def create_table_servicos():
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS servicos (
-            id AUTOINCREMENT PRIMARY KEY,
+            id INT AUTO_INCREMENT PRIMARY KEY,
             nome VARCHAR(255) NOT NULL,
             tipo_servico VARCHAR(255) NOT NULL,
             valor DECIMAL(10, 2) NOT NULL,
@@ -68,7 +68,7 @@ def create_table_itens():
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS itens (
-            id AUTOINCREMENT PRIMARY KEY,
+            id INT AUTO_INCREMENT PRIMARY KEY,
             id_servico INT,
             id_cliente INT,
             FOREIGN KEY (id_servico) REFERENCES servicos(id),
