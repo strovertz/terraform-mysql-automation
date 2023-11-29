@@ -11,7 +11,7 @@ def create_additional_triggers():
     conn = mysql.connector.connect(**db_config)
     cursor = conn.cursor()
 
-    # clientesz- Auditoria
+    # a a tabela clientes - Auditoria
     cursor.execute("""
         CREATE TRIGGER clientes_before_insert_audit
         BEFORE INSERT ON clientes
@@ -22,7 +22,7 @@ def create_additional_triggers():
         END;
     """)
 
-    # aalidar dados
+    # Trigger para a tabela servicos - Validar dados
     cursor.execute("""
         CREATE TRIGGER servicos_before_update_validate
         BEFORE UPDATE ON servicos
@@ -36,7 +36,7 @@ def create_additional_triggers():
         END;
     """)
 
-    # Trigger para a tabela itens - Atualizaç automática de valores
+    # para a tabela itens - Atualização automática de valor
     cursor.execute("""
         CREATE TRIGGER itens_before_insert_auto_update
         BEFORE INSERT ON itens
@@ -47,7 +47,7 @@ def create_additional_triggers():
         END;
     """)
 
-    # tabela itens - Atualização automatica dps da atualização do serviço associado
+    #  tabela itens - Atualização automática após a atualização do serviço associado
     cursor.execute("""
         CREATE TRIGGER servicos_after_update_auto_update_items
         AFTER UPDATE ON servicos
@@ -58,17 +58,17 @@ def create_additional_triggers():
         END;
     """)
 
-    # Tatualiza um campo com base em outra tabela
+    # atualiz um campo com base em outra tabela
     cursor.execute("""
         CREATE TRIGGER clientes_after_insert_update_servicos
         AFTER INSERT ON clientes
         FOR EACH ROW
         BEGIN
-            UPDATE servicos SET tipo_servico = 'Serviço Padrão' WHERE id = NEW.id;
+            UPDATE servicos SET tipo_servico = 'Serviço Padrão' WHERE id = (SELECT id FROM servicos ORDER BY id DESC LIMIT 1);
         END;
     """)
 
-    # garante que o valor do serviço não seja negativo
+    # garantir que o valor do serviço não seja negativo
     cursor.execute("""
         CREATE TRIGGER servicos_before_insert_check_valor
         BEFORE INSERT ON servicos
@@ -81,7 +81,7 @@ def create_additional_triggers():
         END;
     """)
 
-    # registra a exclusão de itens em um log
+    # para registrar a exclusão de itens em um log
     cursor.execute("""
         CREATE TRIGGER itens_after_delete_log
         AFTER DELETE ON itens
@@ -92,7 +92,7 @@ def create_additional_triggers():
         END;
     """)
 
-    #impedir a atualização do CPF na tabela clientes
+    # mpedir a atualização do CPF na tabela clientes
     cursor.execute("""
         CREATE TRIGGER clientes_before_update_cpf
         BEFORE UPDATE ON clientes
@@ -110,7 +110,6 @@ def create_additional_triggers():
 
 def main():
     create_additional_triggers()
-
     print('Triggers adicionais criados com sucesso!')
 
 main()
