@@ -29,7 +29,9 @@ class SupplierManagerController extends Controller
         $sup->data = \Carbon\Carbon::parse($request->input('dataService'))->format('Y/m/d');
         $sup->save();
 
-        return response()->json(['data_updated' => $request->all()], 200);
+        $idDoNovoRegistro = $sup->id;
+
+        return response()->json(['id'=>$idDoNovoRegistro], 200);
 
     }
 

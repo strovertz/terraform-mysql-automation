@@ -224,8 +224,9 @@ export default {
         'nameSupplier': this.nameSupplier,
         'selectedPayService': this.selectedPayService
       })
-          .then((response) => {
-            alert('Serviço adicionado')
+          .then((Response) => {
+            console.log(Response)
+            alert(`Serviço adicionado, id: ${Response.data.id}` )
             this.nameSupplier = '';
             this.dataService = '';
             this.priceService = '';
