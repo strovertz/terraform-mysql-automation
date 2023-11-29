@@ -6,7 +6,7 @@ db_config = {
     'password': 'root',
     'database': 'agencia_turismo'
 }
-def create_complex_triggers():
+def create_triggers():
     conn = mysql.connector.connect(**db_config)
     cursor = conn.cursor()
 
